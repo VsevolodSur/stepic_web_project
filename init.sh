@@ -2,7 +2,7 @@
 
 echo "Init script"
 
-if [ ! -L /etc/gunicorn/hello.py ]; then
+if [ ! -L /etc/gunicorn.d/hello.py ]; then
     sudo ln -s /home/box/web/etc/hello.py /etc/gunicorn.d/hello.py
 fi
 if [ ! -L /etc/nginx/conf.d/test.conf ]; then
