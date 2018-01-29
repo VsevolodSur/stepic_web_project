@@ -1,5 +1,5 @@
 def app(environ, start_response):
-    data = str(environ['QUERY_STRING']).encoding()
+    data = environ['QUERY_STRING']
     # data = '127.0.0.1/?a=1&a=2&b=3'
     args = data.split('&')
     ret = ''
@@ -10,4 +10,4 @@ def app(environ, start_response):
         ('Content-Type', 'text/plain')
     ]
     start_response(status, headers)
-    return iter([ret])
+    return [bytes(ret, 'utf-8')]
