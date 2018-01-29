@@ -1,10 +1,8 @@
-#!/usr/bin/python3
-#-*- coding: utf-8 -*-
-
 def app(environ, start_response):
-    data = environ['QUERY_STRING']
+    data = str(environ['QUERY_STRING']).encoding()
     # data = '127.0.0.1/?a=1&a=2&b=3'
     args = data.split('&')
+    print(args)
     ret = ''
     for arg in args:
         ret = ret + arg + '\n'
