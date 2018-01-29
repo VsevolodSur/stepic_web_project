@@ -2,6 +2,7 @@
 
 echo "Init script"
 
+sed s/localhost/0.0.0.0/ etc/hello_cfg.py > etc/hello.py
 if [ ! -L /etc/gunicorn.d/hello.py ]; then
     sudo ln -s /home/box/web/etc/hello.py /etc/gunicorn.d/hello.py
 fi
