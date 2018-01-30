@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
+    url(r'^$', ),
+    url(r'^login/$', ),
+	url(r'^signup/$', )
+	url(r'^question/[0-9]+/$', ),   # вместо <123> - произвольный ID
+	url(r'^ask/$', ),
+	url(r'^popular/$', ),
+	url(r'^new/$', ),
 ]
