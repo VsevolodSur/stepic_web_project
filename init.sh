@@ -2,6 +2,10 @@
 
 echo "Init script"
 
+sed s/localhost/0.0.0.0/ etc/ask_cfg.py > etc/ask.py
+if [ ! -L /etc/gunicorn.d/ask.py ]; then
+    sudo ln -s /home/box/web/etc/ask.py /etc/gunicorn.d/ask.py
+fi
 sed s/localhost/0.0.0.0/ etc/hello_cfg.py > etc/hello.py
 if [ ! -L /etc/gunicorn.d/hello.py ]; then
     sudo ln -s /home/box/web/etc/hello.py /etc/gunicorn.d/hello.py
@@ -19,3 +23,6 @@ fi
 ls -la /etc/gunicorn.d/hello.py /etc/nginx/conf.d/test.conf
 
 sudo /etc/init.d/nginx restart
+echo "cd ask; gunicorn -c /etc/gunicorn.d/ask.py ask.wsgi:application"
+echo "gunicorn -c /etc/gunicorn.d/hello.py hello:app"
+
