@@ -3,3 +3,5 @@
 *.swp
 etc/ask.py
 etc/hello.py
+*.bak
+*.log
