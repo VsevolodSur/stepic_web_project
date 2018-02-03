@@ -30,7 +30,7 @@ fi
 
 ls -la /etc/gunicorn.d/hello.py /etc/nginx/conf.d/test.conf
 
-# sudo /etc/init.d/nginx restart
+sudo /etc/init.d/nginx restart
 echo "cd ask; gunicorn -c /etc/gunicorn.d/ask.py ask.wsgi:application"
 echo "gunicorn -c /etc/gunicorn.d/hello.py hello:app"
 
