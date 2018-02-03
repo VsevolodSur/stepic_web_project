@@ -5,3 +5,6 @@ def myroot(request, *args, **kwargs):
 
 def ask(request, *args, **kwargs):
     return HttpResponse("It's ask!")
+
+def err404(request, *args, **kwargs):
+    return HttpResponse("404")
