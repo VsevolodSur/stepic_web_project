@@ -28,7 +28,7 @@ elif [ $HOSTNAME = $host ] && [ $IPADDR = $homeipaddr ]; then # on 103
 elif [ $HOSTNAME != $host ]; then #on terminal
 	sed "s/${homeipaddr}/0.0.0.0/" ${WORKDIR}/etc/ask_cfg.py > ${WORKDIR}/etc/ask.py
 	sed "s/${homeipaddr}/0.0.0.0/" ${WORKDIR}/etc/hello_cfg.py > ${WORKDIR}/etc/hello.py
-	sed "s/${homeipaddr}/0.0.0.0/" ${WORKDIR}/etc/nginx_cfg.py > ${WORKDIR}/etc/nginx.conf
+	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/nginx_cfg.py > ${WORKDIR}/etc/nginx.conf
 	sed -i -e "s/DEBUG = True/DEBUG = False/; s/ALLOWED_HOSTS = \[.*\]/ALLOWED_HOSTS = \[\x27${IPADDR}\x27\]/" ${WORKDIR}/ask/ask/settings.py	
 else
 	echo "Unknown host&ip" ${HOSTNAME} ${IPADDR}
