@@ -1,6 +1,4 @@
-# bind = 'localhost:8080'
-bind = 'localhost:8000'
-# bind = '192.168.1.201:8080'
+bind = '192.168.1.201:8000'
 worker = 3
 
 #   Logging
@@ -13,7 +11,7 @@ worker = 3
 #
 #       A string of "debug", "info", "warning", "error", "critical"
 #
-errorlog = '/home/box/web/gunicorn_error.log'
+errorlog = '/home/box/web/ask_error.log'
 loglevel = 'debug'
-accesslog = '/home/box/web/gunicorn_access.log'
+accesslog = '/home/box/web/ask_access.log'
 access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'

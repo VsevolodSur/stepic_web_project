@@ -16,7 +16,7 @@ def popular(request, *args, **kwargs):
     return HttpResponse("It's popular")
     
 def new(request, *args, **kwargs):
-    return HttpResponse("It's new")
+    return HttpResponse("It's Вероника")
    
     
     
