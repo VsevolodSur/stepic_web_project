@@ -9,8 +9,10 @@ def login(request, *args, **kwargs):
 def signup(request, *args, **kwargs):
     return HttpResponse("It's signup")
 
+# def question(request, *args):
+# return HttpResponse("It's question: " + args[0])
 def question(request, *args, **kwargs):
-    return HttpResponse("It's question")
+        return HttpResponse("It's question: " + kwargs['id'])
 
 def popular(request, *args, **kwargs):
     return HttpResponse("It's popular")

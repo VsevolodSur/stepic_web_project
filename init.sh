@@ -20,7 +20,8 @@ fi
 if [ $HOSTNAME = $host ] && [ $IPADDR != $homeipaddr ]; then # on 636
 	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/ask_cfg.py > ${WORKDIR}/etc/ask.py
 	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/hello_cfg.py > ${WORKDIR}/etc/hello.py
-	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/nginx_cfg.conf.py > ${WORKDIR}/etc/nginx.conf
+	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/nginx_cfg.py > ${WORKDIR}/etc/nginx.conf
+	sed -i "s/ALLOWED_HOSTS = \[.*\]/ALLOWED_HOSTS = \[\x27localhost\x27\]/" ${WORKDIR}/ask/ask/settings.py	
 elif [ $HOSTNAME = $host ] && [ $IPADDR = $homeipaddr ]; then # on 103
 	cat ${WORKDIR}/etc/ask_cfg.py > ${WORKDIR}/etc/ask.py
 	cat ${WORKDIR}/etc/hello_cfg.py > ${WORKDIR}/etc/hello.py
@@ -52,3 +53,10 @@ sudo /etc/init.d/nginx restart
 
 echo ${HOSTNAME} ${IPADDR}
 
+sudo /etc/init.d/mysql restart
+mysql -u root -p < mysql_init.sql
+
+# ask/manage.py makemigrations polls
+# ask/manage.py makemigrations qa
+
+ask/manage.py migrate
