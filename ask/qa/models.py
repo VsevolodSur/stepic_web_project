@@ -35,7 +35,7 @@ class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField()
     question = models.TextField() 
-    author = models.CharField(max_length=255)
+    author = models.ForeignKey(Question, null=True, on_delete=models.SET_NULL)
     # class META:
     #     db_table = 'answer'
     #     ordering = ['-creation_date']

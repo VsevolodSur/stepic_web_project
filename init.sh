@@ -56,7 +56,7 @@ echo ${HOSTNAME} ${IPADDR}
 sudo /etc/init.d/mysql restart
 mysql -u root -p < mysql_init.sql
 
-# ask/manage.py makemigrations polls
-# ask/manage.py makemigrations qa
+ask/manage.py makemigrations polls
+ask/manage.py makemigrations qa
 
 ask/manage.py migrate
