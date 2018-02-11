@@ -21,7 +21,7 @@ class Question(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField()
     rating = models.IntegerField(default=0)
-    author = models.CharField(max_length=255)
+    author = models.CharField(max_length=255, unique=True)
     likes = models.CharField(max_length=255)
     objects = models.Manager() # The default manager
     stp_objects = QuestionManager()
@@ -35,7 +35,7 @@ class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField()
     question = models.TextField() 
-    author = models.ForeignKey(Question, null=True, on_delete=models.SET_NULL)
+    author = models.ForeignKey(Question, to_field='author', null=True, on_delete=models.SET_NULL)
     # class META:
     #     db_table = 'answer'
     #     ordering = ['-creation_date']
