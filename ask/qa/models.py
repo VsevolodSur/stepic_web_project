@@ -16,6 +16,21 @@ class QuestionManager(models.Manager):
     def get_popular(self):
         return super(QuestionManager, self).get_queryset()
 
+class Question(models.Model):
+    title = models.CharField(max_length=255)
+    text = models.TextField()
+    added_at = models.DateTimeField()
+    rating = models.IntegerField(default=0)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    likes = models.ManyToManyField(User, related_name="%(app_label)s_%(class)s_related")
+    objects = models.Manager() # The default manager
+    stp_objects = QuestionManager()
+
+    # def __unicode__(self):
+    #     return self.title
+    class META:
+        ordering = ['-rating']
+
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField()
@@ -24,18 +39,3 @@ class Answer(models.Model):
     # class META:
     #     db_table = 'answer'
     #     ordering = ['-creation_date']
-
-class Question(models.Model):
-    title = models.CharField(max_length=255)
-    text = models.TextField()
-    added_at = models.DateTimeField()
-    rating = models.IntegerField(default=0)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    likes = models.ManyToManyField(Answer, related_name="%(app_label)s_%(class)s_related")
-    objects = models.Manager() # The default manager
-    stp_objects = QuestionManager()
-
-    # def __unicode__(self):
-    #     return self.title
-    class META:
-        ordering = ['-rating']
