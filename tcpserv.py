@@ -20,5 +20,5 @@ while True:
         conn.send(data)
         print(data)
         if data.decode().find('close') >= 0:
-            conn.close()
+            # conn.close()
             break
