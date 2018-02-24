@@ -17,8 +17,8 @@ while True:
     while True:
         data = conn.recv(1024)
         if not data:  break
-        conn.send(data)
         print(data)
         if data.decode().find('close') >= 0:
-            # conn.close()
+            conn.close()
             break
+        conn.send(data)
