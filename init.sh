@@ -3,7 +3,7 @@
 echo "Init script"
 host=kurgan
 homeipaddr=192.168.1.201
-IPADDR=`ifconfig | grep addr: |grep -v "127.0.0.1" | awk '{ print substr($2, 6) }'`
+IPADDR=`ifconfig | grep addr: | grep -v "127.0.0.1" | awk '{ print substr($2, 6) }'`
 HOSTNAME=`hostname`
 WORKDIR=/home/box/web
 
