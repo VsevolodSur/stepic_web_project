@@ -7,3 +7,4 @@ etc/hello.py
 *.log
 *migrations*
 my.cnf
+env/*
