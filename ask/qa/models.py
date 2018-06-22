@@ -9,12 +9,14 @@ class QuestionManager(models.Manager):
         tomorrow = today + timedelta(1)
         today_start = datetime.combine(today, time())
         today_end = datetime.combine(tomorrow, time())
-        return super(QuestionManager, self).get_queryset(). \
-        order_by('-added_at').filter(added_at__gte=today_start). \
-        filter(added_at__lt=today_end)
+        # return super(QuestionManager, self).get_queryset(). \
+        # order_by('-added_at').filter(added_at__gte=today_start). \
+        # filter(added_at__lt=today_end)
+        return self.order_by('-added_at')
 
     def get_popular(self):
-        return super(QuestionManager, self).get_queryset()
+        # return super(QuestionManager, self).get_queryset()
+        return self.order_by('-rating')
 
 class Question(models.Model):
     title = models.CharField(max_length=255)
@@ -34,7 +36,7 @@ class Question(models.Model):
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField()
-    question = models.TextField()
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     # class META:
     #     db_table = 'answer'
