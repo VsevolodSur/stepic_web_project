@@ -25,8 +25,8 @@ class Question(models.Model):
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name="%(app_label)s_%(class)s_related")
-    objects = models.Manager() # The default manager
-    stp_objects = QuestionManager()
+    stp_objects = models.Manager() # The default manager
+    objects = QuestionManager()
 
     # def __unicode__(self):
     #     return self.title
