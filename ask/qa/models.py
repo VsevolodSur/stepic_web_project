@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class QuestionManager(models.Manager):
 
-    def get_new(self):
+    def new(self):
         from datetime import datetime, timedelta, time
         today = datetime.now().date()
         tomorrow = today + timedelta(1)
@@ -14,7 +14,7 @@ class QuestionManager(models.Manager):
         # filter(added_at__lt=today_end)
         return self.order_by('-added_at')
 
-    def get_popular(self):
+    def popular(self):
         # return super(QuestionManager, self).get_queryset()
         return self.order_by('-rating')
 
