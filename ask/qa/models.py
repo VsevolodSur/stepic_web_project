@@ -12,14 +12,14 @@ class QuestionManager(models.Manager):
         return super(QuestionManager, self).get_queryset(). \
         order_by('-added_at').filter(added_at__gte=today_start). \
         filter(added_at__lt=today_end)
-    
+
     def get_popular(self):
         return super(QuestionManager, self).get_queryset()
 
 class Question(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
-    added_at = models.DateTimeField()
+    added_at = models.DateTimeField(null=True)
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name="%(app_label)s_%(class)s_related")
@@ -34,7 +34,7 @@ class Question(models.Model):
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField()
-    question = models.TextField() 
+    question = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     # class META:
     #     db_table = 'answer'
