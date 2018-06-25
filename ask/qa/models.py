@@ -9,10 +9,10 @@ class QuestionManager(models.Manager):
         tomorrow = today + timedelta(1)
         today_start = datetime.combine(today, time())
         today_end = datetime.combine(tomorrow, time())
-        # return super(QuestionManager, self).get_queryset(). \
-        # order_by('-added_at').filter(added_at__gte=today_start). \
-        # filter(added_at__lt=today_end)
-        return self.order_by('-added_at')
+        return super(QuestionManager, self).get_queryset(). \
+        order_by('-added_at').filter(added_at__gte=today_start). \
+        filter(added_at__lt=today_end)
+        # return self.order_by('-added_at')
 
     def popular(self):
         # return super(QuestionManager, self).get_queryset()
