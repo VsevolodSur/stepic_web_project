@@ -1,7 +1,13 @@
 from django.http import HttpResponse
+from django.template import RequestContext, loader
 
-def test(request, *args, **kwargs):
-    return HttpResponse('OK')
+def prime(request, *args, **kwargs):
+    page = request.GET.get('page')
+    template = loader.get_template('qa/prime.html')
+    context = RequestContext(request, {
+        'pagevar' : page
+    })
+    return HttpResponse(template.render(context))
 
 def login(request, *args, **kwargs):
     return HttpResponse("It's login")
@@ -12,7 +18,7 @@ def signup(request, *args, **kwargs):
 # def question(request, *args):
 # return HttpResponse("It's question: " + args[0])
 def question(request, *args, **kwargs):
-        return HttpResponse("It's question: " + kwargs['id']) 
+        return HttpResponse("It's question: " + kwargs['id'])
 
 def popular(request, *args, **kwargs):
     return HttpResponse("It's popular")

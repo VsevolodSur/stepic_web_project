@@ -7,6 +7,7 @@ IPADDR=`ifconfig | grep addr: | grep -v "127.0.0.1" | awk '{ print substr($2, 6)
 HOSTNAME=`hostname`
 WORKDIR=/home/box/web
 ENVDIR=${WORKDIR}/env
+APPDIR=${WORKDIR}/ask
 
 if [ -L /etc/gunicorn.d/ask.py ]; then
 	sudo rm /etc/gunicorn.d/ask.py
@@ -24,9 +25,13 @@ fi
 # virtualenv --python=/usr/bin/python3 ${ENVDIR}
 python3 -m venv ${ENVDIR}
 . ${ENVDIR}/bin/activate
-pip install Django==2.0.6
+pip install -U pip
+# pip install Django==2.0.6
+pip install Django==1.9
 pip install pymysql
-# pip install gunicorn
+pip install mysqlclient
+pip install django-autofixture
+pip install gunicorn
 
 if [ $HOSTNAME = $host ] && [ $IPADDR != $homeipaddr ]; then # on 636
 	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/ask_cfg.py > ${WORKDIR}/etc/ask.py
@@ -72,3 +77,6 @@ ask/manage.py makemigrations qa
 
 ask/manage.py migrate
 ${WORKDIR}/gunictl.sh restart
+
+cd ${APPDIR}
+python manage.py loadtestdata --generate-fk ALL qa.Answer:17

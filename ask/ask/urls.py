@@ -19,11 +19,11 @@ from django.conf.urls import include, url
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.myroot, name='myroot'),
+    # url(r'^$', views.myroot, name='myroot'),
     url(r'^', include('qa.urls')),
     # url(r'^login/', qa.views.login, name='login'),
     # url(r'^signup/', include('qa.urls')),
-    # url(r'^question/[0-9]+/', include('qa.urls')),  
+    # url(r'^question/[0-9]+/', include('qa.urls')),
     url(r'^ask/', views.ask, name='ask'),
     # url(r'^popular/', include('qa.urls')),
     # url(r'^new/', include('qa.urls')),

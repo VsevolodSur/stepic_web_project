@@ -10,5 +10,5 @@ urlpatterns = [
 	    url(r'^ask/$', views.ask, name='ask'),
 	    url(r'^popular/$', views.popular, name='popular'),
 	    url(r'^new/$', views.new, name='new'),
-	    url(r'^$', views.test, name='test'),
+	    url(r'^$', views.prime, name='prime'),
  ]
