@@ -1,0 +1,26 @@
+{% for q in questions %}
+  {{ q.id }}({{ q.rating }}). {{ q.title }}<br/>{{q.added_at}}
+  <a href="/question/{{ q.id }}/">
+    Question detail</a><br/>
+  ...<br/>
+{% endfor %}
+
+<div class="pagination">
+  <span class="step-links">
+
+    {% if questions.has_previous %}
+      <a href="{{ paginator.baseurl }}{{ questions.previous_page_number }}">
+        Previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ questions.number }} of {{ questions.paginator.num_pages}}.
+    </span>
+
+    {% if questions.has_next %}
+      <a href="{{ paginator.baseurl }}{{ questions.next_page_number }}">
+        Next</a>
+    {% endif %}
+
+  </span>
+</div>

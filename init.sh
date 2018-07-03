@@ -73,10 +73,11 @@ sudo /etc/init.d/mysql restart
 mysql -u root -p < mysql_init.sql
 
 # ask/manage.py makemigrations polls
-ask/manage.py makemigrations qa
+python ${APPDIR}/manage.py makemigrations qa
 
-ask/manage.py migrate
+python ${APPDIR}/manage.py migrate
 ${WORKDIR}/gunictl.sh restart
 
-cd ${APPDIR}
-python manage.py loadtestdata --generate-fk ALL qa.Answer:17
+# cd ${APPDIR}
+python ${APPDIR}/manage.py loadtestdata --generate-fk ALL qa.Answer:21
+mysql -ubox -pbox < set_rating.sql

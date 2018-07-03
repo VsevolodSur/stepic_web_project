@@ -4,15 +4,15 @@ from django.contrib.auth.models import User
 class QuestionManager(models.Manager):
 
     def new(self):
-        from datetime import datetime, timedelta, time
-        today = datetime.now().date()
-        tomorrow = today + timedelta(1)
-        today_start = datetime.combine(today, time())
-        today_end = datetime.combine(tomorrow, time())
-        return super(QuestionManager, self).get_queryset(). \
-        order_by('-added_at').filter(added_at__gte=today_start). \
-        filter(added_at__lt=today_end)
-        # return self.order_by('-added_at')
+        # from datetime import datetime, timedelta, time
+        # today = datetime.now().date()
+        # tomorrow = today + timedelta(1)
+        # today_start = datetime.combine(today, time())
+        # today_end = datetime.combine(tomorrow, time())
+        # return super(QuestionManager, self).get_queryset(). \
+        # order_by('-added_at').filter(added_at__gte=today_start). \
+        # filter(added_at__lt=today_end)
+        return self.order_by('-id')
 
     def popular(self):
         # return super(QuestionManager, self).get_queryset()
@@ -28,8 +28,9 @@ class Question(models.Model):
     stp_objects = models.Manager() # The default manager
     objects = QuestionManager()
 
-    # def __unicode__(self):
+    # def __str__(self):
     #     return self.title
+
     class META:
         ordering = ['-rating']
 
@@ -38,6 +39,11 @@ class Answer(models.Model):
     added_at = models.DateTimeField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.text
+
     # class META:
     #     db_table = 'answer'
     #     ordering = ['-creation_date']
