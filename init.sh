@@ -22,8 +22,31 @@ if [ -d ${ENVDIR}/ ]; then
 	rm -rf ${ENVDIR}
 fi
 
-# virtualenv --python=/usr/bin/python3 ${ENVDIR}
-python3 -m venv ${ENVDIR}
+# virvtualenv --python=/usr/bin/python3 ${ENVDIR}
+
+if [ $HOSTNAME = $host ] && [ $IPADDR != $homeipaddr ]; then # on 636
+	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/ask_cfg.py > ${WORKDIR}/etc/ask.py
+	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/hello_cfg.py > ${WORKDIR}/etc/hello.py
+	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/nginx_cfg.py > ${WORKDIR}/etc/nginx.conf
+	sed -i "s/ALLOWED_HOSTS = \[.*\]/ALLOWED_HOSTS = \[\x27localhost\x27\]/" ${WORKDIR}/ask/ask/settings.py
+	python3 -m venv ${ENVDIR}
+elif [ $HOSTNAME = $host ] && [ $IPADDR = $homeipaddr ]; then # on 103
+	cat ${WORKDIR}/etc/ask_cfg.py > ${WORKDIR}/etc/ask.py
+	cat ${WORKDIR}/etc/hello_cfg.py > ${WORKDIR}/etc/hello.py
+	cat ${WORKDIR}/etc/nginx_cfg.py > ${WORKDIR}/etc/nginx.conf
+	python3 -m venv ${ENVDIR}
+elif [ $HOSTNAME != $host ]; then #on terminal
+	sed "s/${homeipaddr}/0.0.0.0/" ${WORKDIR}/etc/ask_cfg.py > ${WORKDIR}/etc/ask.py
+	sed "s/${homeipaddr}/0.0.0.0/" ${WORKDIR}/etc/hello_cfg.py > ${WORKDIR}/etc/hello.py
+	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/nginx_cfg.py > ${WORKDIR}/etc/nginx.conf
+	sed -i -e "s/DEBUG = True/DEBUG = False/; s/ALLOWED_HOSTS = \[.*\]/ALLOWED_HOSTS = \[\x27*\x27\]/" ${WORKDIR}/ask/ask/settings.py
+	virvtualenv --python=/usr/bin/python3 ${ENVDIR}
+	sudo pip install django-autofixture
+else
+	echo "Unknown host&ip" ${HOSTNAME} ${IPADDR}
+	exit 1
+fi
+
 . ${ENVDIR}/bin/activate
 pip install -U pip
 # pip install Django==2.0.6
@@ -32,25 +55,6 @@ pip install pymysql
 pip install mysqlclient
 pip install django-autofixture
 pip install gunicorn
-
-if [ $HOSTNAME = $host ] && [ $IPADDR != $homeipaddr ]; then # on 636
-	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/ask_cfg.py > ${WORKDIR}/etc/ask.py
-	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/hello_cfg.py > ${WORKDIR}/etc/hello.py
-	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/nginx_cfg.py > ${WORKDIR}/etc/nginx.conf
-	sed -i "s/ALLOWED_HOSTS = \[.*\]/ALLOWED_HOSTS = \[\x27localhost\x27\]/" ${WORKDIR}/ask/ask/settings.py
-elif [ $HOSTNAME = $host ] && [ $IPADDR = $homeipaddr ]; then # on 103
-	cat ${WORKDIR}/etc/ask_cfg.py > ${WORKDIR}/etc/ask.py
-	cat ${WORKDIR}/etc/hello_cfg.py > ${WORKDIR}/etc/hello.py
-	cat ${WORKDIR}/etc/nginx_cfg.py > ${WORKDIR}/etc/nginx.conf
-elif [ $HOSTNAME != $host ]; then #on terminal
-	sed "s/${homeipaddr}/0.0.0.0/" ${WORKDIR}/etc/ask_cfg.py > ${WORKDIR}/etc/ask.py
-	sed "s/${homeipaddr}/0.0.0.0/" ${WORKDIR}/etc/hello_cfg.py > ${WORKDIR}/etc/hello.py
-	sed "s/${homeipaddr}/localhost/" ${WORKDIR}/etc/nginx_cfg.py > ${WORKDIR}/etc/nginx.conf
-	sed -i -e "s/DEBUG = True/DEBUG = False/; s/ALLOWED_HOSTS = \[.*\]/ALLOWED_HOSTS = \[\x27*\x27\]/" ${WORKDIR}/ask/ask/settings.py
-else
-	echo "Unknown host&ip" ${HOSTNAME} ${IPADDR}
-	exit 1
-fi
 
 sudo ln -s ${WORKDIR}/etc/ask.py /etc/gunicorn.d/ask.py
 sudo ln -s ${WORKDIR}/etc/hello.py /etc/gunicorn.d/hello.py
