@@ -1,0 +1,11 @@
+user.email=giwecm@gmail.com
+user.name=Vsevolod Suryaninov
+core.editor=vim
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=ssh://git@ssh.github.com:443/VsevolodSur/stepic_web_project.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
