@@ -24,7 +24,7 @@ urlpatterns = [
     # url(r'^login/', qa.views.login, name='login'),
     # url(r'^signup/', include('qa.urls')),
     # url(r'^question/[0-9]+/', include('qa.urls')),
-    url(r'^ask/', views.ask, name='ask'),
+    # url(r'^ask/', views.ask, name='ask'),
     # url(r'^popular/', include('qa.urls')),
     # url(r'^new/', include('qa.urls')),
     url(r'^polls/', include('polls.urls')),
