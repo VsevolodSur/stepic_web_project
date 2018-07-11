@@ -16,7 +16,8 @@ def new(request):
         questions = paginator.page(page)
     except PageNotAnInteger:
         # return  HttpResponseNotFound()
-        return  HttpResponse("PageNotAnInteger")
+        # return  HttpResponse("PageNotAnInteger")
+        questions = paginator.page(1)
     except EmptyPage:
         questions = paginator.page(paginator.num_pages)
     context = {
