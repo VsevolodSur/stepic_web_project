@@ -15,7 +15,8 @@ def new(request):
     try:
         questions = paginator.page(page)
     except PageNotAnInteger:
-        return  HttpResponseNotFound()
+        # return  HttpResponseNotFound()
+        return  HttpResponse("PageNotAnInteger")
     except EmptyPage:
         questions = paginator.page(paginator.num_pages)
     context = {
@@ -72,8 +73,8 @@ def signup(request, *args, **kwargs):
 # def question(request, *args, **kwargs):
 #         return HttpResponse("It's question: " + kwargs['id'])
 
-def new(request, *args, **kwargs):
-    return HttpResponse("It's Вероника")
+# def new(request, *args, **kwargs):
+#     return HttpResponse("It's Вероника")
 
 def ask(request, *args, **kwargs):
     return HttpResponse('ASK')

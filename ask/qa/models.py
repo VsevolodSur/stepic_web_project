@@ -31,8 +31,8 @@ class Question(models.Model):
     # def __str__(self):
     #     return self.title
 
-    class META:
-        ordering = ['-rating']
+    # class META:
+    #     ordering = ['-rating']
 
 class Answer(models.Model):
     text = models.TextField()
