@@ -84,5 +84,5 @@ python ${APPDIR}/manage.py migrate
 ${WORKDIR}/gunictl.sh restart
 
 # cd ${APPDIR}
-# python ${APPDIR}/manage.py loadtestdata --generate-fk ALL qa.Answer:21
-# mysql -ubox -pbox < set_rating.sql
+python ${APPDIR}/manage.py loadtestdata --generate-fk ALL qa.Answer:21
+mysql -ubox -pbox < set_rating.sql
