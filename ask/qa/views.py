@@ -72,8 +72,8 @@ def signup(request, *args, **kwargs):
 # def question(request, *args, **kwargs):
 #         return HttpResponse("It's question: " + kwargs['id'])
 
-# def new(request, *args, **kwargs):
-#     return HttpResponse("It's Вероника")
+def new(request, *args, **kwargs):
+    return HttpResponse("It's Вероника")
 
 def ask(request, *args, **kwargs):
     return HttpResponse('ASK')
