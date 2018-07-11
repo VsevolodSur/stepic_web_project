@@ -29,5 +29,5 @@ urlpatterns = [
     # url(r'^new/', include('qa.urls')),
     url(r'^polls/', include('polls.urls')),
     # path('^admin/', admin.site.urls),
-    url(r'^.*$', views.err404, name='err404'),
+    # url(r'^.*$', views.err404, name='err404'),
 ]
