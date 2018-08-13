@@ -1,0 +1,20 @@
+{% for e in form.non_filed_errors %}
+  <div class="alert alert_danger">{{ e }}</div>
+{% endfor %}
+<form class="form-horisontal" method="post" action="/ask/">
+  <filedset>
+    {% for filed in form %}
+      <div class="control-group"
+        {% if filed.error %}has-error{% endif %}
+        <laber class="control-label">{{ filed.label }}</label>
+          <div class="controls">{{ filed }}</div>
+      </div>
+    {% endfor %}
+  </filedset>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">
+    <!-- <input type="submit" value="Ask"/> -->
+    Save</button>
+  </div>
+  {% csrf_token %}
+</form>

@@ -74,6 +74,7 @@ sudo /etc/init.d/nginx restart
 echo ${HOSTNAME} ${IPADDR}
 
 sudo /etc/init.d/mysql restart
+echo "Enter mysql password"
 mysql -u root -p < mysql_drop.sql
 mysql -u root -p < mysql_init.sql
 
@@ -83,6 +84,8 @@ python ${APPDIR}/manage.py makemigrations qa
 python ${APPDIR}/manage.py migrate
 ${WORKDIR}/gunictl.sh restart
 
+echo "Enter Django password for superuser. At least 8 characters"
+python ${APPDIR}/manage.py createsuperuser --username admin --email admin@kurgan.com
 # cd ${APPDIR}
 # python ${APPDIR}/manage.py loadtestdata --generate-fk ALL qa.Answer:21
 # mysql -ubox -pbox < set_rating.sql

@@ -28,6 +28,6 @@ urlpatterns = [
     # url(r'^popular/', include('qa.urls')),
     # url(r'^new/', include('qa.urls')),
     url(r'^polls/', include('polls.urls')),
-    # path('^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
     # url(r'^.*$', views.err404, name='err404'),
 ]

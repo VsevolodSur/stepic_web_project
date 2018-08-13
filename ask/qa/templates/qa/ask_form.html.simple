@@ -1,0 +1,6 @@
+
+<form action="/ask/" method="post">
+  {{ form }}<br/>
+  <input type="submit" value="Ask"/>
+  {% csrf_token %}
+</form>

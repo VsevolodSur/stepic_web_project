@@ -1,5 +1,5 @@
 <html>
-  <head>Question Title:</head>
+  <head>Question List:</head><br/>
   <body>{% for q in questions %}
     {{ q.id }}({{ q.rating }}). {{ q.title }}<br/>{{q.added_at}}
       <a href="/question/{{ q.id }}/">
