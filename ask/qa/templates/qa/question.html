@@ -4,8 +4,10 @@
     {{ question.title }}<br/>Question: {{ question.text }}<br/>
       ...<br/>
       Answers:
-      {% for a in answers %}
-        {{ a.text }}<br/>
-      {% endfor %}
+      <div>
+        {% for a in answers %}
+          {{ a.text }}<br/>
+        {% endfor %}
+      </div>
     </body>
 </html>
