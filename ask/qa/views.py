@@ -58,11 +58,11 @@ def question(request, *args, **kwargs):
         answers = Answer.objects.filter(question=kwargs['id'])
     except Answer.DoesNotExist:
         answers = None
-    form = AnswerForm(question.text)
+    # form = AnswerForm(question.text)
     context = {
         'question' : question,
         'answers' : answers,
-        'form': form,
+        # 'form': form,
     }
     template = loader.get_template('qa/question.html')
     return HttpResponse(template.render(context,request))
